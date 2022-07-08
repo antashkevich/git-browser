@@ -10,6 +10,8 @@ import DummyView from '../components/dummy-view'
 import NotFound from '../components/404'
 
 import Startup from './startup'
+import Repo from '../components/repo'
+import Readme from '../components/readme'
 
 const OnlyAnonymousRoute = ({ component: Component, ...rest }) => {
   const user = useSelector((state) => state.auth.user)
@@ -48,8 +50,9 @@ const RootComponent = (props) => {
       <RouterSelector history={history} location={props.location} context={props.context}>
         <Startup>
           <Switch>
-            <Route exact path="/" component={DummyView} />
-            <Route exact path="/dashboard" component={Home} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/:userName" component={Repo} />
+            <Route exact path="/:userName/:repositoryName" component={Readme} />
             <PrivateRoute exact path="/hidden-route" component={DummyView} />
             <OnlyAnonymousRoute exact path="/anonymous-route" component={DummyView} />
 
